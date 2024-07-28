@@ -1,6 +1,5 @@
 import os
 import numpy as np
-
 from extractpdf import PDFTextExtractor
 from faiss_store import FAISSStorage
 from vectorizer import Vectorizer
