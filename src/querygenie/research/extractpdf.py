@@ -1,12 +1,13 @@
-from PyPDF2 import PdfReader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 class PDFTextExtractor:
-    def extract_text(self, pdf_path):
-        """Extract text from all pages of the PDF."""
-        reader = PdfReader(pdf_path)
-        texts = []
-        for page in reader.pages:
-            text = page.extract_text()
-            if text:
-                texts.append(text)
+    def __init__(self, directory_path):
+        self.directory_path = directory_path
+        self.loader = PyPDFDirectoryLoader(directory_path)
+
+    def extract_text(self):
+        """Extract text from all PDF files in the directory."""
+        documents = self.loader.load()
+        texts = [doc.page_content for doc in documents]
         return texts
+
